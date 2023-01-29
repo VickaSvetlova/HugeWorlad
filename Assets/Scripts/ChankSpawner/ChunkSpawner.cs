@@ -8,12 +8,17 @@ public class ChunkSpawner : MonoBehaviour
 {
     [SerializeField] private int countNeuhborgs;
     [SerializeField] private GameObject chunkPrefab;
-    [SerializeField] private GameObject firstChunk;
+    public GameObject firstChunk;
     [SerializeField] public Vector2 mapSize;
     [SerializeField] private float chukSize;
     private List<ChunkData> chunks = new List<ChunkData>();
     private int x, z;
     private List<ChunkData> chunkNeiborgs = new List<ChunkData>();
+
+    public void PlayerPosition(Vector3 pos)
+    {
+        transform.position = pos;
+    }
 
     private void Start()
     {
@@ -80,21 +85,12 @@ public class ChunkSpawner : MonoBehaviour
 
     private void SpawnChunk(List<ChunkData> list)
     {
-        for (int xx = x - countNeuhborgs; xx <= x + countNeuhborgs; xx++)
+        foreach (var chunk in list)
         {
-            for (int yy = z - countNeuhborgs; yy <= z + countNeuhborgs; yy++)
-            {
-                foreach (var chunk in list)
-                {
-                    if (xx == chunk.x && yy == chunk.z)
-                    {
-                        if (chunk.isInstance) continue;
-                        var chank = Instantiate(chunkPrefab, new Vector3(xx, 0, yy) * chukSize, quaternion.identity);
-                        chunk.thisObject = chank;
-                        chunk.isInstance = true;
-                    }
-                }
-            }
+            if (chunk.isInstance) continue;
+            var chank = Instantiate(chunkPrefab, new Vector3(chunk.x, 0, chunk.z) * chukSize, quaternion.identity);
+            chunk.thisObject = chank;
+            chunk.isInstance = true;
         }
 
         RemoveNonNeuborgh();

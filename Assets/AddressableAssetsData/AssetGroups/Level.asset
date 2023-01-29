@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  m_GroupName: Level
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 79c5a09dfb8ac4247a4edd815fd30164
+  m_SerializeEntries:
+  - m_GUID: 766fd3ff04aab4745a764d33daac86fa
+    m_Address: Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Arms.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 43714b68324cc2c409d534d9874f2a2b
+    m_Address: Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Body.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b25e99361ac31d4e9ae83c46aee69ea
+    m_Address: Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Legs.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e497690d72f27d4e877a8405528e78f
+    m_Address: Assets/Audio/Daft Punk - Tron Legacy Theme (dizer.net).mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8402edb31bdded84292e8129d60de725
+    m_Address: Assets/Images/3dc8f10cbebe1d53b3b1e6854bc2376c-01.jpeg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cf32f4186271bdd40b5cd8dcd5c71fca
+    m_Address: Assets/Prefabs/PlayerArmature.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5df7c378978da7348a2b1be7e559451f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ee51137b3d7e0424eaab2896be9c0ecb, type: 2}
+    - {fileID: 11400000, guid: c403a6ab1b13620499162e68f1493660, type: 2}
