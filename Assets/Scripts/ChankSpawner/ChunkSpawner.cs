@@ -12,7 +12,7 @@ public class ChunkSpawner : MonoBehaviour
     [SerializeField] public Vector2 mapSize;
     [SerializeField] private float chukSize;
     private List<ChunkData> chunks = new List<ChunkData>();
-    private int x = 1, z = 1;
+    private int x, z;
     private List<ChunkData> chunkNeiborgs = new List<ChunkData>();
 
     private void Start()
@@ -24,11 +24,20 @@ public class ChunkSpawner : MonoBehaviour
     private void AddFirstChunk()
     {
         var first = new ChunkData();
-        first.z = 0;
-        first.x = 0;
+        var pos = GetPositionCharacter();
+        first.z = (int)pos.z;
+        first.x = (int)pos.x;
         first.isInstance = true;
         first.thisObject = firstChunk;
         chunks.Add(first);
+    }
+
+    private Vector3 GetPositionCharacter()
+    {
+        var position = transform.position;
+        x = (int)((position.x + chukSize / 2) / chukSize);
+        z = (int)((position.z + chukSize / 2) / chukSize);
+        return new Vector3(x, position.y, z);
     }
 
     private void CreateChunks()
@@ -117,9 +126,10 @@ public class ChunkSpawner : MonoBehaviour
 
     private void Update()
     {
-        var position = transform.position;
-        x = (int)((position.x + chukSize / 2) / chukSize);
-        z = (int)((position.z + chukSize / 2) / chukSize);
+        var pose = GetPositionCharacter();
+        x = (int)pose.x;
+        z = (int)pose.z;
+
         if (x != _oldX || z != _oldZ)
         {
             DownloadChunk();
