@@ -5,6 +5,8 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Addressable
@@ -29,14 +31,31 @@ namespace Addressable
         //UI
         [SerializeField] private RawImage _rawImageLogo;
         [SerializeField] private string nameRootCharacter;
+        [SerializeField] private GameObject loader;
         private GameObject playerController;
         private InputAction quit;
 
         private InputActionMap _currentMap;
 
+        private bool _clearPreviousScene;
+        private SceneInstance _previousLoadedScene;
+
         private void Start()
         {
+            loader.SetActive(true);
             Addressables.InitializeAsync().Completed += AddressableManagerCompleted;
+        }
+
+        private void Update()
+        {
+            if (loader.activeSelf
+                && playerArmatureAssetReference.Asset != null
+                && musicAssetReference.Asset != null
+                && unityLogoAssetReferenceTexture2D.Asset != null)
+            {
+                //loader
+                loader.SetActive(false);
+            }
         }
 
         private void LoadLogo(AsyncOperationHandle<Texture2D> asyncOperationHandle)
@@ -77,12 +96,37 @@ namespace Addressable
 
         private void LoadCharacter()
         {
-            playerArmatureAssetReference.InstantiateAsync().Completed += (go) =>
+            playerArmatureAssetReference.LoadAssetAsync<GameObject>().Completed += (playerArmatureAsset) =>
             {
-                playerController = go.Result;
-                cinemachineVirtualCamera.Follow = playerController.transform.Find(nameRootCharacter);
-                playerController.AddComponent<ChunkSpawner>().PlayerPosition(new Vector3(55*14, 1, 55*14));
-                tex.text += "\n Addressable load character complete...";
+                tex.text += "\n Addressable loading character...";
+                playerArmatureAssetReference.InstantiateAsync().Completed += (playerArmatureGameObject) =>
+                {
+                    tex.text += "\n Addressable instantiating character...";
+                    playerController = playerArmatureGameObject.Result;
+                    cinemachineVirtualCamera.Follow = playerController.transform.Find(nameRootCharacter);
+                    playerController.AddComponent<ChunkSpawner>().PlayerPosition(new Vector3(55 * 14, 1, 55 * 14));
+                    tex.text += "\n Addressable instance character complete...";
+                };
+            };
+        }
+
+        public void LoadAddressableLevel(String addressableKey)
+        {
+            if (_clearPreviousScene)
+            {
+                Addressables.UnloadSceneAsync(_previousLoadedScene).Completed += (asyncHandle) =>
+                {
+                    _clearPreviousScene = false;
+                    _previousLoadedScene = new SceneInstance();
+                    tex.text += $"\n Uploaded scene {addressableKey} successfully";
+                };
+            }
+
+            Addressables.LoadSceneAsync(addressableKey, LoadSceneMode.Additive).Completed += (asyncHandle) =>
+            {
+                _clearPreviousScene = true;
+                _previousLoadedScene = asyncHandle.Result;
+                tex.text += $"\n Loaded scene {addressableKey} successfully";
             };
         }
 

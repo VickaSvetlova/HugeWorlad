@@ -41,6 +41,14 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/PlayerArmature.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 77b4d3f45bbf93b47b43b18016cc36b8
+    m_Address: Assets/Scenes/Level1.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f819c9112f140bd4e96101e7eb76ae63
+    m_Address: Assets/Scenes/Level2.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5df7c378978da7348a2b1be7e559451f, type: 2}
   m_SchemaSet:
