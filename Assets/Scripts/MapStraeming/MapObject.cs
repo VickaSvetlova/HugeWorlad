@@ -17,6 +17,11 @@ public struct MapObject
         ObjectPosition = mapObjectRef.position;
         ObjectRotation = mapObjectRef.rotation;
         ObjectScale = mapObjectRef.localScale;
-        pathAsset = "Assets/Prefabs/MapStreaming/";
+        //object parentObject = EditorUtility.GetPrefabParent(mapObjectRef.gameObject);
+        //object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(mapObjectRef.gameObject);
+        // var path = AssetDatabase.GetAssetPath((GameObject)parentObject).Split('/')[3];
+        //var path = AssetDatabase.GetAssetPath((GameObject)parentObject);
+        // pathAsset = path;
+        pathAsset = "Assets/Graphics/PolygonApocalypse/Prefabs/";
     }
 }

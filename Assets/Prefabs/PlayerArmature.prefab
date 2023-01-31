@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0973d681a6b78884e9f2d67040454f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countNeuhborgs: 5
+  countNeuhborgs: 3
   chunkPrefab: {fileID: 7338515819174539919, guid: 7199da332a6e26a4f82ddf5fa13fe27d,
     type: 3}
   firstChunk: {fileID: 0}
